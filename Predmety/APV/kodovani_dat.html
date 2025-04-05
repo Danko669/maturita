@@ -134,7 +134,10 @@
         // Funkce pro načtení CSV souboru
         async function loadQuestions() {
             try {
-                const response = await fetch('data/kodovani_dat_questions.txt');
+                const response = await fetch('https://your-netlify-domain/data/kodovani_dat_questions.txt');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 const csvData = await response.text();
                 
                 // Parsování CSV
