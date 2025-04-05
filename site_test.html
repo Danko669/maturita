@@ -134,7 +134,7 @@
         // Funkce pro načtení CSV souboru
         async function loadQuestions() {
             try {
-                const response = await fetch('site_questions.csv');
+                const response = await fetch('site_questions.txt');
                 const csvData = await response.text();
                 
                 // Parsování CSV
