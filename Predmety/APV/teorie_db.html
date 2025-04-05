@@ -134,7 +134,7 @@
         // Funkce pro načtení CSV souboru
         async function loadQuestions() {
             try {
-                const response = await fetch('/data/teorie_db_qeustions.txt');
+                const response = await fetch('\data\teorie_db_questions.txt');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }

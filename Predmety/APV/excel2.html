@@ -134,7 +134,7 @@
         // Funkce pro načtení CSV souboru
         async function loadQuestions() {
             try {
-                const response = await fetch('/data/excel2_qeustions.txt');
+                const response = await fetch('\data\excel2_qeustions.txt');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
