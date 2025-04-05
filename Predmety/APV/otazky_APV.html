@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procvičování Předmětů</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .subjects {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .subject-link {
+            text-decoration: none;
+            background-color: #1E88E5;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .subject-link:hover {
+            transform: scale(1.1);
+            background-color: #1565C0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subject-link {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Vyber si otázku z APV</h1>
+    <div class="subjects">
+        <a href="Predmety/APV/kodovani_dat.html" class="subject-link">Kodovani dat</a>
+        <a href="#" class="subject-link">APV</a>
+        <a href="#" class="subject-link">PVA</a>
+        <a href="#" class="subject-link">EPO</a>
+        <a href="#" class="subject-link">HW</a>
+        <a href="#" class="subject-link">OPS</a>
+        <a href="#" class="subject-link">POS</a>
+    </div>
+</body>
+</html>
