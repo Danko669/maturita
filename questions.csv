@@ -1,0 +1,4 @@
+question,answer
+"Na konsole je zobrazeno: Switch> Jakým příkazem se dostaneme do další úrovně?","enable"
+"Máme zadánu adresu 192.168.96.251/23 Broadcast je?","192.168.97.255"
+"Protokol RIP","je jednuchý+patří mezi IGP protokoly"
