@@ -14,6 +14,7 @@ h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
     animation: fadeIn 1.5s ease-in-out;
+    text-align: center; /* Zarovnání nadpisu na střed */
 }
 
 .subjects {
@@ -52,6 +53,7 @@ h1 {
 @media (max-width: 600px) {
     h1 {
         font-size: 2rem;
+        text-align: center; /* Ujistěte se, že je zarovnání na střed i na mobilu */
     }
 
     .subject-link {
