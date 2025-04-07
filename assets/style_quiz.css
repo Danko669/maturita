@@ -71,8 +71,15 @@ h1 {
     gap: 10px; /* Mezera mezi řádky */
 }
 
+#counter {
+    font-size: 16px;
+    margin-bottom: 10px; /* Mezera pod počtem otázek */
+    text-align: center;
+}
+
 .button-row {
     display: flex;
+    justify-content: center; /* Zarovnání tlačítek na střed */
     gap: 15px; /* Mezera mezi tlačítky */
 }
 
@@ -88,9 +95,4 @@ button {
 
 button:hover {
     background-color: #1565c0;
-}
-
-#counter {
-    min-width: 80px;
-    text-align: center;
 }
