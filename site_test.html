@@ -47,16 +47,16 @@
             try {
                 const response = await fetch('data/site_questions.txt');
                 const csvData = await response.text();
-                
+
                 // Parsování CSV
-                const lines = csvData.split('\n');
+                const lines = csvData.split('\n').filter(line => line.trim() !== ''); // Odstranění prázdných řádků
                 questions = lines.slice(1).map(line => {
-                    const [question, answer] = line.split('","').map(item => 
-                        item.replace(/^"|"$/g, '').trim() // Odstranění uvozovek na začátku a na konci
+                    const [question, answer] = line.split('","').map(item =>
+                        item.replace(/^"|"$/g, '').trim() // Odstranění uvozovek a mezer
                     );
                     return { question, answer };
-                }).filter(item => item.question && item.answer);
-                
+                }).filter(item => item.question && item.answer); // Filtrování neplatných záznamů
+
                 // Náhodné zamíchání otázek
                 shuffleQuestions();
                 showQuestion();
