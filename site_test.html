@@ -52,7 +52,7 @@
                 const lines = csvData.split('\n');
                 questions = lines.slice(1).map(line => {
                     const [question, answer] = line.split('","').map(item => 
-                        item.replace(/^"/, '').replace(/"$/, '').trim()
+                        item.replace(/^"|"$/g, '').trim() // Odstranění uvozovek na začátku a na konci
                     );
                     return { question, answer };
                 }).filter(item => item.question && item.answer);
