@@ -66,8 +66,14 @@ h1 {
 .controls {
     margin-top: 30px;
     display: flex;
-    gap: 15px;
-    align-items: center;
+    flex-direction: column; /* Změna na sloupec */
+    align-items: center; /* Zarovnání na střed */
+    gap: 10px; /* Mezera mezi řádky */
+}
+
+.button-row {
+    display: flex;
+    gap: 15px; /* Mezera mezi tlačítky */
 }
 
 button {
