@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test sítě</title>
+    <link rel="stylesheet" href="https://maturita1pokus.netlify.app/assets/style_quiz.css">
+</head>
+<body>
+    <h1>Test OPS - Operační systm</h1>
+    
+    <div class="card-container">
+        <div class="card" id="card">
+            <div class="card-face card-front" id="question">
+                Klikni pro zobrazení otázky
+            </div>
+            <div class="card-face card-back" id="answer">
+                Klikni pro zobrazení odpovědi
+            </div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <span id="counter">0/0</span> <!-- Počet otázek nad tlačítky -->
+        <div class="button-row">
+            <button id="prev-btn">Předchozí</button>
+            <button id="shuffle-btn">Zamíchat</button>
+            <button id="next-btn">Další</button>
+        </div>
+    </div>
+    
+    <script>
+        const card = document.getElementById('card');
+        const questionElement = document.getElementById('question');
+        const answerElement = document.getElementById('answer');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const shuffleBtn = document.getElementById('shuffle-btn');
+        const counterElement = document.getElementById('counter');
+        
+        let questions = [];
+        let currentIndex = 0;
+        let isFlipped = false;
+        
+        // Funkce pro načtení CSV souboru
+        async function loadQuestions() {
+            try {
+                const response = await fetch('https://maturita1pokus.netlify.app/data/operacni_system_questions.txt');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const csvData = await response.text();
+                
+                // Parsování CSV
+                const lines = csvData.split('\n');
+                questions = lines.slice(1).map(line => {
+                    const [question, answer] = line.split('","').map(item => 
+                        item.replace(/^"/, '').replace(/"$/, '').trim()
+                    );
+                    return { question, answer };
+                }).filter(item => item.question && item.answer);
+                
+                // Náhodné zamíchání otázek
+                shuffleQuestions();
+                showQuestion();
+            } catch (error) {
+                console.error('Chyba při načítání otázek:', error);
+                questionElement.textContent = 'Chyba při načítání otázek. Zkontrolujte soubor questions.csv.';
+            }
+        }
+        
+        // Náhodné zamíchání otázek
+        function shuffleQuestions() {
+            for (let i = questions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [questions[i], questions[j]] = [questions[j], questions[i]];
+            }
+        }
+        
+        // Zobrazí aktuální otázku
+        function showQuestion() {
+            if (questions.length === 0) return;
+            
+            questionElement.textContent = questions[currentIndex].question;
+            answerElement.textContent = questions[currentIndex].answer;
+            counterElement.textContent = `${currentIndex + 1}/${questions.length}`;
+            
+            if (isFlipped) {
+                card.classList.remove('flipped');
+                isFlipped = false;
+            }
+        }
+        
+        // Inicializace - načtení otázek
+        loadQuestions();
+        
+        // Flip animace při kliknutí na kartu
+        card.addEventListener('click', function() {
+            card.classList.toggle('flipped');
+            isFlipped = !isFlipped;
+        });
+        
+        // Předchozí otázka
+        prevBtn.addEventListener('click', function() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                showQuestion();
+            }
+        });
+        
+        // Další otázka
+        nextBtn.addEventListener('click', function() {
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
+                showQuestion();
+            }
+        });
+        
+        // Zamíchání otázek
+        shuffleBtn.addEventListener('click', function() {
+            shuffleQuestions();
+            currentIndex = 0;
+            showQuestion();
+        });
+        
+        // Klávesové zkratky
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevBtn.click();
+            } else if (e.key === 'ArrowRight') {
+                nextBtn.click();
+            } else if (e.key === ' ') {
+                card.click();
+            } else if (e.key === 's') {
+                shuffleBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
